@@ -1,0 +1,76 @@
+<%- include('partials/header') -%>
+
+<h1><%= userName %></h1>
+<div class="row">
+    <div class="col-xs-12">
+        <h2 class='post-category'>Public Blogs</h2>
+        <hr>
+        <% postsArray.forEach( (post) => { %>
+        <% if(post.public) { %>
+            <h3><a class='post-heading' href='/posts/<%=post._id%>'><%= post.title %></a></h3>
+
+            <% if (post.post.length > 100) { %>
+
+                <p><%= post.post.substring(0,100) + '...' %>
+                <a href='/posts/<%=post._id%>'>Read more</a>
+                </p>
+
+            <% } else { %>
+
+                <p><%= post.post %></p>
+
+            <% } %>
+            <% } %>
+        <% }); %>
+
+    </div>
+
+    <% if(!visitor) { %>
+
+    <div class="col-xs-12">
+        <h2 class='post-category'>Private Journal Entries</h2>
+        <hr>
+        <% postsArray.forEach( (post) => { %>
+        <% if(!post.public) { %>
+            <h3><a class='post-heading' href='/posts/<%=post._id%>'><%= post.title %></a></h3>
+
+            <% if (post.post.length > 100) { %>
+
+                <p><%= post.post.substring(0,100) + '...' %>
+                <a href='/posts/<%=post._id%>'>Read more</a>
+                </p>
+
+            <% } else { %>
+
+                <p><%= post.post %></p>
+
+            <% } %>
+            <% } %>
+        <% }); %>
+    </div>
+    <% } %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('partials/footer') -%>

@@ -1,0 +1,28 @@
+<%- include('partials/header') -%>
+<!-- <div id="fb-root"></div> -->
+<!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0&appId=1127066761001755&autoLogAppEvents=1" nonce="KGWNrf5X"></script> -->
+<h1><%=title%></h1>
+<span><%=author%></span>
+<p class='postcontent'><%=content%></p>
+<% if(!visitor) { %>
+<p style='display:none;'><%=id%></p>
+<form class="delete" action="/delete" method="post">
+    <button class='btn btn-danger btn-lg' type="submit" name="postId" value='<%=id%>'>Delete Post</button>
+    <span id="delete">WARNING! This action can't be undone!</span>
+</form>
+<% } %>
+<!-- <div class="comment-section">
+    <div class="row">
+        <div class="col-xs-12">
+            <form class="comment" action="index.html" method="post">
+                <div class="form-group">
+                    <textarea name="newComment" rows="6" cols="150" placeholder='Add your comment here.'></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+<!-- <div class="fb-comments" data-href="http://localhost:3000/posts/" data-numposts="5" data-width=""></div> -->
+
+
+<%- include('partials/footer') -%>

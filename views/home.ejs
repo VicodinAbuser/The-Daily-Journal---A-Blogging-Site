@@ -1,0 +1,61 @@
+<%- include('partials/header') -%>
+
+<h1 class='main-heading'>Welcome to The Daily Journal</h1>
+
+<% if(!authenticated) { %>
+    <h4 class='main-heading-subtitle'>See what people are writing and <a href="/login">login</a> to share your own experiences!</h4>
+<% } else { %>
+    <h4 class='main-heading-subtitle'>Start writing your own <a href='/compose'>blogpost</a> or an entirely private <a href='/compose'>journal entry</a>!</h4>
+<% } %>
+
+<% postsArray.forEach( (post) => { %>
+    <% if(post.public) { %>
+    <h3><a class='post-heading' href='/posts/<%=post._id%>'><%= post.title %></a></h3>
+
+    <% if (post.post.length > 100) { %>
+
+        <p><%= post.post.substring(0,100) + '...' %>
+        <a href='/posts/<%=post._id%>'>Read more</a>
+        </p>
+        <a href='/profile/<%=post.authorId%>'><span><%=post.account%></span>
+        <span><%=post.email%></span></a>
+         <!-- if(post.likes==0) {
+            <form class="like" action="/like" method="post">
+                <button type="submit" name="liked" value='true'><i class="fas fa-thumbs-up"></i> Like</button>
+                <span><%=post.likes%> people like this.</span>
+            </form>
+         } else {
+            <form class="like" action="/like" method="post">
+                <input type="hidden" name="postId" value="<%=post._id%>">
+                <button type="submit" name="liked" value='false'><i class="fas fa-thumbs-up"></i> Like</button>
+                <span>You, and <%=post.likes%> people like this.</span>
+            </form>
+         }  -->
+
+
+    <% } else { %>
+
+        <p><%= post.post %></p>
+        <a href='/profile/<%=post.authorId%>'><span><%=post.account%></span>
+        <span><%=post.email%></span></a>
+         <!-- if(!post.liked) {
+            <form class="like" action="/like" method="post">
+                <button type="submit" name="liked" value='true'><i class="fas fa-thumbs-up"></i> Like</button>
+                <span><%=post.likes%> people like this.</span>
+            </form>
+         } else {
+            <form class="like" action="/like" method="post">
+                <button type="submit" name="liked" value='false'><i class="fas fa-thumbs-up"></i> Like</button>
+                <span>You, and <%=post.likes%> people like this.</span>
+            </form>
+         }  -->
+
+    <% } %>
+    <% } %>
+<% }); %>
+
+
+
+
+
+<%- include('partials/footer') -%>
