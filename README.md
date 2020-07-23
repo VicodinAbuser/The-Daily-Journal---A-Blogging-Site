@@ -1,4 +1,4 @@
-# The-Daily-Journal---A-Blogging-Site
+# The Daily Journal - A Blogging Site
 
 https://shielded-wave-63105.herokuapp.com/
 
