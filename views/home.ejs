@@ -10,7 +10,7 @@
 
 <% postsArray.forEach( (post) => { %>
     <% if(post.public) { %>
-    <h3><a class='post-heading' href='/posts/<%=post._id%>'><%= post.title %></a></h3>
+    <h3 id='post-heading'><a class='post-heading' href='/posts/<%=post._id%>'><%= post.title %></a></h3>
 
     <% if (post.post.length > 100) { %>
 

@@ -75,6 +75,10 @@ a.post-heading:hover {
     white-space: pre-line;
 }
 
+#post-heading {
+    margin-top: 40px;
+}
+
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;

@@ -67,6 +67,10 @@ button.publish {
     color: inherit;
 }
 
+#post-heading {
+    margin-top: 40px;
+}
+
 a.post-heading:hover {
     text-decoration: none;
 }
