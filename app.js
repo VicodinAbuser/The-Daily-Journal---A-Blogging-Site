@@ -42,6 +42,7 @@ const postSchema = new mongoose.Schema({
     account: String,
     email: String,
     authorId: String,
+    timestamp: String
     // liked: Boolean,
     // likes: Number,
     // comments: [String],
@@ -109,7 +110,10 @@ passport.deserializeUser((id, done) => {
 
 app.get('/', (req, res) => {
     Post.find({public: true}, (err, posts) => {
-            res.render('home', {postsArray: posts, authenticated: req.isAuthenticated()});
+        posts.sort ( (a, b) => {
+            return new Date(b.timestamp) - new Date(a.timestamp);
+        });
+        res.render('home', {postsArray: posts, authenticated: req.isAuthenticated()});
     })
 });
 
@@ -364,13 +368,18 @@ app.post('/compose', (req, res) => {
             console.log(err);
             res.send('Please log in to post.');
         } else {
+
+            const today = new Date();
+            const dateTime = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate() + ' ' + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
             const post = new Post ({
                 title: req.body.title,
                 post: req.body.post,
                 public: req.body.public,
                 account: foundUser.accountName,
                 email: foundUser.username,
-                authorId: req.user.id
+                authorId: req.user.id,
+                timestamp: dateTime
             });
 
             // if(post.public) {
