@@ -8,8 +8,11 @@ body {
     /* height: 100%; */
     font-family: "Montserrat";
     font-weight: 400;
-    background-color: #f5feff;
-    background-image: url("https://www.transparenttextures.com/patterns/dark-dotted-2.png");
+    /* background-color: #f5feff; */
+    /* background-image: url("https://www.transparenttextures.com/patterns/dark-dotted-2.png"); */
+    background-color: #f5fffd;
+    background-image: url("https://www.transparenttextures.com/patterns/dark-stripes-light.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 p {
