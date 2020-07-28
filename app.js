@@ -42,7 +42,8 @@ const postSchema = new mongoose.Schema({
     account: String,
     email: String,
     authorId: String,
-    timestamp: String
+    timestamp: String,
+    likes: Number
     // liked: Boolean,
     // likes: Number,
     // comments: [String],
@@ -58,7 +59,8 @@ const usersSchema = new mongoose.Schema({
     password: String,
     // googleId: String,
     // facebookId: String,
-    posts: [postSchema]
+    posts: [postSchema],
+    likedPosts: [String]
 });
 
 usersSchema.plugin(passportLocalMongoose);
@@ -113,7 +115,20 @@ app.get('/', (req, res) => {
         posts.sort ( (a, b) => {
             return new Date(b.timestamp) - new Date(a.timestamp);
         });
-        res.render('home', {postsArray: posts, authenticated: req.isAuthenticated()});
+
+        if(req.isAuthenticated()) {
+            User.findById(req.user.id, (err, foundUser) => {
+                if(err) {
+                    console.log(err);
+                    res.send("There was an error. Please try again.");
+                } else {
+                    res.render('home', {postsArray: posts, authenticated: req.isAuthenticated(), userLikedPosts: foundUser.likedPosts});
+                }
+            });
+
+        } else {
+            res.render('home', {postsArray: posts, authenticated: req.isAuthenticated(), userLikedPosts: null});
+        }
     })
 });
 
@@ -233,6 +248,54 @@ app.get('/posts/:postId', (req, res) => {
         }
     });
 });
+
+
+app.post('/like', (req, res) => {
+    const liked = req.body.liked;
+    const postId = req.body.postId;
+
+    if(req.isAuthenticated()) {
+        User.findById(req.user.id, (err, foundUser) => {
+            if(err) {
+                console.log(err);
+                res.send("There was an error. Please try again.");
+            } else {
+                if(liked==='true'){
+                    foundUser.likedPosts.push(postId);
+                    foundUser.save();
+                    Post.findById(postId, (err, foundPost) => {
+                        if(err) {
+                            console.log(err);
+                            res.send("There was an error");
+                        } else {
+                            foundPost.likes++;
+                            console.log(foundPost.likes)
+                            foundPost.save();
+                            console.log(foundPost.likes)
+                        }
+                    });
+                    res.redirect('/');
+                } else {
+                    foundUser.likedPosts.splice(foundUser.likedPosts.indexOf(postId), 1);
+                    foundUser.save();
+                    Post.findById(postId, (err, foundPost) => {
+                        if(err) {
+                            console.log(err);
+                            res.send("There was an error");
+                        } else {
+                            foundPost.likes--;
+                            console.log(foundPost.likes)
+                            foundPost.save();
+                            console.log(foundPost.likes)
+                        }
+                    });
+                    res.redirect('/');
+                }
+            }
+        });
+    }
+});
+
 
 app.post('/delete', (req, res) => {
     const postId = req.body.postId;
@@ -379,7 +442,8 @@ app.post('/compose', (req, res) => {
                 account: foundUser.accountName,
                 email: foundUser.username,
                 authorId: req.user.id,
-                timestamp: dateTime
+                timestamp: dateTime,
+                likes: 0
             });
 
             // if(post.public) {

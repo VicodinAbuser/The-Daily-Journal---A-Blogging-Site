@@ -10,6 +10,8 @@ body {
     font-weight: 400;
     background-color: black;
     color: #ffdbc5;
+    background-image: url("https://www.transparenttextures.com/patterns/dark-dotted-2.png");
+
 }
 p {
     word-wrap: break-word;
@@ -164,6 +166,14 @@ a.post-heading:hover {
     color: #1abc9c;
 }
 
+.fas {
+    color: #1abc9c;
+}
+
+.fas:hover {
+    color: #337ab7;
+}
+
 /* .btn-social {
     height: 50px;
     font-size: 18px;
@@ -216,6 +226,12 @@ a.post-heading:hover {
         letter-spacing: 3px;
     }
 
+    hr {
+        border-top: 1px solid #1abc9c;
+        margin-top: 20px;
+        width: 70%;
+        margin-left: 0;
+    }
 
     .navbar-brand a {
         letter-spacing: 2px;

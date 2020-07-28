@@ -19,18 +19,21 @@
         </p>
         <a href='/profile/<%=post.authorId%>'><span><%=post.account%></span>
         <span><%=post.email%></span></a>
-         <!-- if(post.likes==0) {
+
+        <% if(authenticated) { %>
             <form class="like" action="/like" method="post">
-                <button type="submit" name="liked" value='true'><i class="fas fa-thumbs-up"></i> Like</button>
-                <span><%=post.likes%> people like this.</span>
+                <% if(userLikedPosts.includes(post._id)) { %>
+                    <input type="hidden" name="postId" value="<%=post._id%>">
+                    <button class='btn  btn-xs' type="submit" name="liked" value='false'><i class="fas fa-thumbs-up"></i> Un Like</button><span><%=post.likes%> people like this.</span>
+                <% } else { %>
+                    <input type="hidden" name="postId" value="<%=post._id%>">
+                    <button class='btn  btn-xs' type="submit" name="liked" value='true'><i class="fas fa-thumbs-up"></i> Like</button><span><%=post.likes%> people like this.</span>
+                <% } %>
             </form>
-         } else {
-            <form class="like" action="/like" method="post">
-                <input type="hidden" name="postId" value="<%=post._id%>">
-                <button type="submit" name="liked" value='false'><i class="fas fa-thumbs-up"></i> Like</button>
-                <span>You, and <%=post.likes%> people like this.</span>
-            </form>
-         }  -->
+
+        <% } else { %>
+            <br><span><%=post.likes%> people like this.</span>
+        <% } %>
 
 
     <% } else { %>
@@ -38,17 +41,22 @@
         <p><%= post.post %></p>
         <a href='/profile/<%=post.authorId%>'><span><%=post.account%></span>
         <span><%=post.email%></span></a>
-         <!-- if(!post.liked) {
+        
+        <% if(authenticated) { %>
             <form class="like" action="/like" method="post">
-                <button type="submit" name="liked" value='true'><i class="fas fa-thumbs-up"></i> Like</button>
-                <span><%=post.likes%> people like this.</span>
+                <% if(userLikedPosts.includes(post._id)) { %>
+                    <input type="hidden" name="postId" value="<%=post._id%>">
+                    <button class='btn  btn-xs' type="submit" name="liked" value='false'><i class="fas fa-thumbs-up"></i> Un Like</button><span><%=post.likes%> people like this.</span>
+                <% } else { %>
+                    <input type="hidden" name="postId" value="<%=post._id%>">
+                    <button class='btn  btn-xs' type="submit" name="liked" value='true'><i class="fas fa-thumbs-up"></i> Like</button><span><%=post.likes%> people like this.</span>
+                <% } %>
             </form>
-         } else {
-            <form class="like" action="/like" method="post">
-                <button type="submit" name="liked" value='false'><i class="fas fa-thumbs-up"></i> Like</button>
-                <span>You, and <%=post.likes%> people like this.</span>
-            </form>
-         }  -->
+
+        <% } else { %>
+            <br><span><%=post.likes%> people like this.</span>
+        <% } %>
+
 
     <% } %>
     <% } %>
