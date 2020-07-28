@@ -159,6 +159,11 @@ a.post-heading:hover {
     color: inherit;/*#337ab7;*/
 }
 
+.btn-xs {
+    background-color: #f5fffd;
+    background-image: url("https://www.transparenttextures.com/patterns/dark-stripes-light.png");
+}
+
 .btn:hover {
     color: #337ab7;
 }
