@@ -18,7 +18,8 @@ const aboutContent = "Daily journal is blogging site where you can post your blo
 const app = express();
 
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static("public"));
 
 app.use(session({

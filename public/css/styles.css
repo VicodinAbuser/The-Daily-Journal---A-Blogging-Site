@@ -36,6 +36,14 @@ hr {
     margin-left: 0;
 }
 
+iframe{
+    margin:auto;
+}
+
+img {
+    max-width: 700px;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -219,6 +227,11 @@ a.post-heading:hover {
     iframe{
         width: 300px;
         height: 215px
+    }
+
+    img {
+        max-width: 300px;
+        max-height: 300px;
     }
 
     .navbar {

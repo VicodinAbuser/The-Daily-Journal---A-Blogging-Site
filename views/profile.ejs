@@ -10,14 +10,15 @@
             <h3><a class='post-heading' href='/posts/<%=post._id%>'><%= post.title %></a></h3>
 
             <% if (post.post.length > 100) { %>
-
-                <p><%= post.post.substring(0,100) + '...' %>
+                <% const postSubstring = post.post %>
+                <p><%= postSubstring.replace( /(<([^>]+)>)/ig, '').substring(0,90) + '...' %>
                 <a href='/posts/<%=post._id%>'>Read more</a>
                 </p>
 
             <% } else { %>
 
-                <p><%= post.post %></p>
+                <% const postString = post.post; %>
+                <p><%= postString.replace( /(<([^>]+)>)/ig, '') %></p>
 
             <% } %>
             <% } %>
@@ -36,13 +37,15 @@
 
             <% if (post.post.length > 100) { %>
 
-                <p><%= post.post.substring(0,100) + '...' %>
+                <% const postSubstring = post.post %>
+                <p><%= postSubstring.replace( /(<([^>]+)>)/ig, '').substring(0,90) + '...' %>
                 <a href='/posts/<%=post._id%>'>Read more</a>
                 </p>
 
             <% } else { %>
 
-                <p><%= post.post %></p>
+                <% const postString = post.post; %>
+                <p><%= postString.replace( /(<([^>]+)>)/ig, '') %></p>
 
             <% } %>
             <% } %>
