@@ -216,6 +216,11 @@ a.post-heading:hover {
 
 
 @media (max-width: 900px) {
+    iframe{
+        width: 300px;
+        height: 215px
+    }
+
     .navbar {
         letter-spacing: 3px;
     }
@@ -223,11 +228,17 @@ a.post-heading:hover {
     hr {
         border-top: 1px solid #1abc9c;
         margin-top: 20px;
-        width: 70%;
+        width: 80%;
         margin-left: 0;
     }
 
     .navbar-brand a {
         letter-spacing: 2px;
+    }
+
+    #delete {
+        margin-left: 5px;
+        color: red;
+        display: inline-block;
     }
 }

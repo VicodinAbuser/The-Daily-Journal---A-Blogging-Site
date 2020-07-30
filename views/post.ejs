@@ -3,7 +3,7 @@
 <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0&appId=1127066761001755&autoLogAppEvents=1" nonce="KGWNrf5X"></script> -->
 <h1><%=title%></h1>
 <span><%=author%></span>
-<p class='postcontent'><%=content%></p>
+<p class='postcontent'><%-content%></p>
 <% if(!visitor) { %>
 <p style='display:none;'><%=id%></p>
 <form class="delete" action="/delete" method="post">

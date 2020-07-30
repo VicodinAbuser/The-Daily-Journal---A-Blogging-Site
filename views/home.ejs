@@ -14,7 +14,8 @@
 
     <% if (post.post.length > 100) { %>
 
-        <p><%= post.post.substring(0,100) + '...' %>
+        <% const postSubstring = post.post %>
+        <p><%= postSubstring.replace( /(<([^>]+)>)/ig, '').substring(0,90) + '...' %>
         <a href='/posts/<%=post._id%>'>Read more</a>
         </p>
         <a href='/profile/<%=post.authorId%>'><span><%=post.account%></span>
@@ -37,8 +38,9 @@
 
 
     <% } else { %>
-
-        <p><%= post.post %></p>
+        
+        <% const postString = post.post; %>
+        <p><%= postString.replace( /(<([^>]+)>)/ig, '') %></p>
         <a href='/profile/<%=post.authorId%>'><span><%=post.account%></span>
         <span><%=post.email%></span></a>
 
