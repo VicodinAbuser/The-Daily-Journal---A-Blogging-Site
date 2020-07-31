@@ -11,7 +11,7 @@ body {
     background-color: black;
     color: #ffdbc5;
     background-image: url("https://www.transparenttextures.com/patterns/dark-dotted-2.png");
-
+    background-attachment: fixed;
 }
 p {
     word-wrap: break-word;
@@ -182,13 +182,25 @@ a.post-heading:hover {
     color: #337ab7;
 }
 
-.btn {
+.btn-xs {
     background-color: #000000;
 /* background-image: url("https://www.transparenttextures.com/patterns/dark-dotted-2.png"); */
 }
 
+
+
 .btn:hover {
     color: #337ab7;
+}
+
+.sign {
+    margin-top: 25px;
+}
+
+.btn-social {
+    margin-top: 0;
+    text-align: center;
+
 }
 
 /* .btn-social {

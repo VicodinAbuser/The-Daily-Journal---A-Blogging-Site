@@ -10,8 +10,9 @@ body {
     font-weight: 400;
     /* background-color: #f5feff; */
     /* background-image: url("https://www.transparenttextures.com/patterns/dark-dotted-2.png"); */
-    background-color: #f5fffd;
-    background-image: url("https://www.transparenttextures.com/patterns/dark-stripes-light.png");
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
+    background-attachment: fixed;
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
@@ -168,12 +169,22 @@ a.post-heading:hover {
 }
 
 .btn-xs {
-    background-color: #f5fffd;
-    background-image: url("https://www.transparenttextures.com/patterns/dark-stripes-light.png");
+    background-color: #ffffff;
+background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
 }
 
 .btn:hover {
     color: #337ab7;
+}
+
+.sign {
+    margin-top: 25px;
+}
+
+.btn-social {
+    margin-top: 0;
+    text-align: center;
+
 }
 
 /* .btn-social {

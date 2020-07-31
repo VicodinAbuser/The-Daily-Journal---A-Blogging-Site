@@ -58,6 +58,7 @@ const usersSchema = new mongoose.Schema({
     accountName: String,
     email: String,
     password: String,
+    googleId: String,
     // googleId: String,
     // facebookId: String,
     posts: [postSchema],
@@ -82,19 +83,19 @@ passport.deserializeUser((id, done) => {
 });
 
 
-// passport.use(new GoogleStrategy({
-//     clientID: process.env.CLIENT_ID,
-//     clientSecret: process.env.CLIENT_SECRET,
-//     callbackURL: "http://localhost:3000/auth/google/",
-//     // userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-//   },
-//   function(accessToken, refreshToken, profile, cb) {
-//     console.log(profile);
-//     User.findOrCreate({ googleId: profile.id }, function (err, user) {
-//       return cb(err, user);
-//     });
-//   }
-// ));
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "https://shielded-wave-63105.herokuapp.com/auth/google/callback",
+    // userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+    User.findOrCreate({ googleId: profile.id, accountName: profile.displayName, username: profile.emails[0]['value'] }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
 //
 // passport.use(new FacebookStrategy({
 //     clientID: process.env.FB_APP_ID,
@@ -133,13 +134,13 @@ app.get('/', (req, res) => {
     })
 });
 
-// app.get('/auth/google',
-//     passport.authenticate('google', { scope: ['profile'] })
-// );
-//
-// app.get('/auth/google/', passport.authenticate('google', {failureRedirect: '/login'}), (req, res) => {
-//     res.redirect('/');
-// });
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/login'}), (req, res) => {
+    res.redirect('/');
+});
 //
 // app.get('/auth/facebook',
 //   passport.authenticate('facebook'));
@@ -349,44 +350,6 @@ app.post('/delete', (req, res) => {
     });
 });
 
-// app.post('/like', (req, res) => {
-//     const toLike = req.body.liked;
-//     const postId = req.body.postId;
-//
-//     if(toLike == "true") {
-//         Post.findById(postId, (err, foundPost) => {
-//             if(err) {
-//                 console.log(err);
-//                 res.send('There was an error. Please try again');
-//             } else {
-//                 if(foundPost) {
-//                     foundPost.liked = true;
-//                     foundPost.likes++;
-//
-//                     res.redirect('/');
-//                 } else {
-//                     res.send("Could not find post. Please try again.");
-//                 }
-//             }
-//         });
-//     } else {
-//         Post.findById(postId, (err, foundPost) => {
-//             if(err) {
-//                 console.log(err);
-//                 res.send('There was an error. Please try again');
-//             } else {
-//                 if(foundPost) {
-//                     foundPost.liked = true;
-//                     foundPost.likes++;
-//
-//                     res.redirect('/');
-//                 } else {
-//                     res.send("Could not find post. Please try again.");
-//                 }
-//             }
-//         });
-//     }
-// })
 
 app.get('/logout', (req, res) => {
     req.logout();
