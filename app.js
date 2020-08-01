@@ -167,20 +167,24 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-    User.findById(req.user.id, (err, foundUser)=> {
-        if(err) {
-            console.log(err);
-            res.send('Please log in to see your profile.');
-        } else {
-            if (foundUser) {
-                console.log(foundUser.posts.length);
-                res.render('profile', { postsArray: foundUser.posts, userName: foundUser.accountName, authenticated: req.isAuthenticated(), visitor: false });
+    if(req.isAuthenticated()) {
+        User.findById(req.user.id, (err, foundUser)=> {
+            if(err) {
+                console.log(err);
+                res.send('Please log in to see your profile.');
+            } else {
+                if (foundUser) {
+                    console.log(foundUser.posts.length);
+                    res.render('profile', { postsArray: foundUser.posts, userName: foundUser.accountName, authenticated: req.isAuthenticated(), visitor: false });
+                }
+                else{
+                    res.send("Please log in to see your profile.");
+                }
             }
-            else{
-                res.send("Please log in to see your profile.");
-            }
-        }
-    })
+        });
+    } else {
+        res.send("Please log in to see your profile.");
+    }
 });
 
 app.get('/profile/:profileId', (req, res) => {
