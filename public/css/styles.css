@@ -119,6 +119,14 @@ a.post-heading:hover {
 
 }
 
+.navbarItems {
+    transition: all 0.5s;
+}
+
+.navbarItems:hover {
+    transform: scale(1.1);
+}
+
 .form-check {
   position: relative;
   display: block;

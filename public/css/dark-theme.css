@@ -129,6 +129,14 @@ a.post-heading:hover {
     background-color: #221f3b;
 }
 
+.navbarItems {
+    transition: all 0.5s;
+}
+
+.navbarItems:hover {
+    transform: scale(1.1);
+}
+
 .form-check {
   position: relative;
   display: block;

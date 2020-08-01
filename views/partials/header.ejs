@@ -34,18 +34,18 @@
         <ul class="nav navbar-nav navbar-right">
           <!-- 6 -->
           <!-- <li id="home"><a href="/">HOME</a></li> -->
-          <li id="about"><a href="/about">ABOUT US</a></li>
-          <li id="contact"><a href="/contact">CONTACT US</a></li>
-          <li><a href='#' id="theme-toggle">DARK MODE</a></li>
+          <li class='navbarItems' id="about"><a href="/about">ABOUT US</a></li>
+          <li class='navbarItems' id="contact"><a href="/contact">CONTACT US</a></li>
+          <li class='navbarItems'><a href='#' id="theme-toggle">DARK MODE</a></li>
           <% if (authenticated) { %>
-                <li id='profile'><a href="/profile" role='button'>PROFILE</a></li>
-                <li id='compose'><a href="/compose">POST</a></li>
-                <li id='logout'>
+                <li class='navbarItems' id='profile'><a href="/profile" role='button'>PROFILE</a></li>
+                <li class='navbarItems' id='compose'><a href="/compose">POST</a></li>
+                <li class='navbarItems' id='logout'>
                     <a href="/logout" role="button">LOGOUT</a>
                 </li>
           <% } else { %>
-              <li id='register'><a href="/register" role="button">REGISTER</a></li>
-              <li id='login'><a href="/login" role="button">LOGIN</a></li>
+              <li class='navbarItems' id='register'><a href="/register" role="button">REGISTER</a></li>
+              <li class='navbarItems' id='login'><a href="/login" role="button">LOGIN</a></li>
           <% }%>
         </ul>
     </div>
