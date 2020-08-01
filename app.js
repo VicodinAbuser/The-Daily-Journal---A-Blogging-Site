@@ -172,8 +172,13 @@ app.get('/profile', (req, res) => {
             console.log(err);
             res.send('Please log in to see your profile.');
         } else {
-            console.log(foundUser.posts.length);
-            res.render('profile', { postsArray: foundUser.posts, userName: foundUser.accountName, authenticated: req.isAuthenticated(), visitor: false });
+            if (foundUser) {
+                console.log(foundUser.posts.length);
+                res.render('profile', { postsArray: foundUser.posts, userName: foundUser.accountName, authenticated: req.isAuthenticated(), visitor: false });
+            }
+            else{
+                res.send("Please log in to see your profile.");
+            }
         }
     })
 });
@@ -213,7 +218,11 @@ app.get('/profile/:profileId', (req, res) => {
 });
 
 app.get('/compose', (req, res) => {
-    res.render('compose', {authenticated: req.isAuthenticated()});
+    if(req.isAuthenticated()){
+        res.render('compose', {authenticated: req.isAuthenticated()});
+    } else {
+        res.send("Please login to write a post.");
+    }
 });
 
 app.get('/posts/:postId', (req, res) => {
