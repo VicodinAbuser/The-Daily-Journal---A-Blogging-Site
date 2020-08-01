@@ -284,6 +284,14 @@ a.post-heading:hover {
         letter-spacing: 2px;
     }
 
+    .navbarItems {
+        transition: all 0.5s;
+    }
+
+    .navbarItems:hover {
+        transform: scale(1);
+    }
+
     #delete {
         margin-left: 5px;
         color: red;
